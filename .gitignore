@@ -40,6 +40,13 @@ Generated\ Files/
 *.VisualState.xml
 TestResult.xml
 
+node_modules
+
+.DS_Store
+
+.env
+
+
 # Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/
