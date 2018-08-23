@@ -1,24 +1,31 @@
-// require("dotenv").config();
+//dotenv file needs to be in smae directory as the js files
+require("dotenv").config();
 
-// var keyFile = require("./key.js");
-
-// var spotify = new Spotify(keys.spotify);
-// var client = new Twitter(keys.twitter);
+var keyFile = require("./key.js");
 
 var Spotify = require('node-spotify-api');
 
-var spotID = process.env.SPOTIFY_ID;
-var spotSecret = process.env.SPOTIFY_SECRET;
+var spotID = keyFile.spotify.id;
+var spotSecret = keyFile.spotify.secret;
+
+console.log("spotify ID: " + spotID);
+console.log("spotify secret: " + spotSecret);
+
+// user enter commans line arguments to search the API
+var typeSearch = process.argv[2];
+var querySearch = process.argv[3];
+var limitSearch = process.argv[4];
+
  
 var spotify = new Spotify({
-  id: spotID, //"6ac1e4f925024138ba16b21d587c6947" // keys.spotify.id
-  secret: spotSecret//"2a252a82f1a340bdb8efd980bcea7c6b" // keys.spotify.secret
+  id: spotID,
+  secret: spotSecret
 });
 
 var response;
  
 spotify
-  .search({ type: 'track', query: 'All the Small Things' })
+  .search({ type: typeSearch, query: querySearch, limit: limitSearch }/*, callback*/)
   .then(function(response) {
     console.log(response);
   })
