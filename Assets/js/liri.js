@@ -32,4 +32,6 @@ spotify
 .catch(function(err) {
   console.error('Error occurred: ' + err); 
 });
+
+//Figure out how to parse the objects that we are now gettings back
    
