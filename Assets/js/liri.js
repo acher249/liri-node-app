@@ -4,6 +4,7 @@ require("dotenv").config();
 var keyFile = require("./key.js");
 
 var Spotify = require('node-spotify-api');
+var omdb = require('omdb');
 
 var spotID = keyFile.spotify.id;
 var spotSecret = keyFile.spotify.secret;
@@ -12,7 +13,7 @@ console.log("spotify ID: " + spotID);
 console.log("spotify secret: " + spotSecret);
 
 // user enter commans line arguments to search the API
-// var typeSearch = process.argv[2];
+var firstArg = process.argv[2];
 var querySearch = process.argv[3];
 // var limitSearch = process.argv[4];
 
@@ -34,6 +35,30 @@ function spotifyThisSong(querySearch){
     console.error('Error occurred: ' + err); 
   });
 }
- 
-spotifyThisSong(querySearch);
+
+function movieThis(querySearch){
+
+    omdb.search('Anchorman', function(err, movies) {
+      if(err) {
+          return console.error(err);
+      }
+  
+      if(movies.length < 1) {
+          return console.log('No movies were found!');
+      }
+  
+      movies.forEach(function(movie) {
+          console.log('%s (%d)', movie.title, movie.year);
+      });
+  });
+}
    
+if(firstArg === "spotifyThisSong"){
+  console.log("First Arg is Spotify");
+  spotifyThisSong(querySearch);
+}else {
+  console.log("First Arg is Movie");
+  movieThis(querySearch);
+};
+
+
