@@ -27,7 +27,7 @@ var response;
 spotify
   .search({ type: typeSearch, query: querySearch, limit: limitSearch }/*, callback*/)
   .then(function(response) {
-    console.log(response);
+    console.log(response.artists);
   })
 .catch(function(err) {
   console.error('Error occurred: ' + err); 
