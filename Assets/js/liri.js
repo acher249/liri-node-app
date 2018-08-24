@@ -12,9 +12,9 @@ console.log("spotify ID: " + spotID);
 console.log("spotify secret: " + spotSecret);
 
 // user enter commans line arguments to search the API
-var typeSearch = process.argv[2];
+// var typeSearch = process.argv[2];
 var querySearch = process.argv[3];
-var limitSearch = process.argv[4];
+// var limitSearch = process.argv[4];
 
  
 var spotify = new Spotify({
@@ -23,15 +23,17 @@ var spotify = new Spotify({
 });
 
 var response;
- 
-spotify
-  .search({ type: typeSearch, query: querySearch, limit: limitSearch }/*, callback*/)
-  .then(function(response) {
-    console.log(response.artists);
-  })
-.catch(function(err) {
-  console.error('Error occurred: ' + err); 
-});
 
-//Figure out how to parse the objects that we are now gettings back
+function spotifyThisSong(querySearch){
+    spotify
+    .search({ type: 'artist', query: querySearch, limit: 1 }/*, callback*/)
+    .then(function(response) {
+      console.log(response.artists.items[0].external_urls);
+    })
+  .catch(function(err) {
+    console.error('Error occurred: ' + err); 
+  });
+}
+ 
+spotifyThisSong(querySearch);
    
