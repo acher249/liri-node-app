@@ -62,7 +62,9 @@ var params = {
 function movieThis(querySearch){
 
   omdbApi.search(params, function(err, data) {
-    console.log(data);
+    console.log("Title: " + data.Search[0].Title);
+    console.log("Movie release year: " + data.Search[0].Year);
+    console.log("Poster: " + data.Search[0].Poster);
   });
 }
    
